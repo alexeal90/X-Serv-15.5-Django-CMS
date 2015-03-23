@@ -1,0 +1,11 @@
+from django.shortcuts import render
+from models import Pages
+from django.http import HttpResponse, HttpResponseNotFound
+# Create your views here.
+
+	def contentApp(request, recurso):
+		try:
+			fila = Pages.objects.get(name=recurso)
+			return HttpResponse(fila.page)
+		except Pages.DoesNotExist:
+			return HttpResponseNotFound("Page not found: " + recurso)
